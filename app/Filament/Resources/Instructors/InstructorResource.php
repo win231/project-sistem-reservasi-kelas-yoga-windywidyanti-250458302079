@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Filament\Resources\Instructors;
+
+use BackedEnum;
+use App\Models\Instructor;
+use Filament\Tables\Table;
+use Filament\Schemas\Schema;
+use Filament\Resources\Resource;
+use Filament\Support\Icons\Heroicon;
+use App\Filament\Resources\Instructors\Pages\EditInstructor;
+use App\Filament\Resources\Instructors\Pages\ListInstructors;
+use App\Filament\Resources\Instructors\Pages\CreateInstructor;
+use App\Filament\Resources\Instructors\Schemas\InstructorForm;
+use App\Filament\Resources\Instructors\Tables\InstructorsTable; // Pastikan ini ter-import
+
+class InstructorResource extends Resource
+{
+    protected static ?string $model = Instructor::class;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::Users;
+
+    protected static ?string $recordTitleAttribute = 'name';
+
+    public static function form(Schema $schema): Schema
+    {
+        return InstructorForm::configure($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return InstructorsTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListInstructors::route('/'),
+            'create' => CreateInstructor::route('/create'),
+            'edit' => EditInstructor::route('/{record}/edit'),
+        ];
+    }
+}
