@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->foreignId('class_type_id')->constrained('class_types')->cascadeOnDelete();
-            $table->string('difficulty_level')->nullable(); 
+            $table->string('difficulty_level'); 
             $table->timestamps();
         });
     }

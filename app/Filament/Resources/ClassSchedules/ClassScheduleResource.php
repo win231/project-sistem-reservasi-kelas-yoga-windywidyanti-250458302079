@@ -43,8 +43,6 @@ class ClassScheduleResource extends Resource
     {
         return [
             'index' => ListClassSchedules::route('/'),
-            'create' => CreateClassSchedule::route('/create'),
-            'edit' => EditClassSchedule::route('/{record}/edit'),
         ];
     }
 }

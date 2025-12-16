@@ -9,7 +9,7 @@ class AuthController extends Controller
 {
     public function showLoginPage()
     {
-        return view('livewire.auth.login');
+        return view('components.layouts.auth-layout');
     }
 
     public function login(Request $request)
@@ -30,8 +30,6 @@ class AuthController extends Controller
 
             return redirect(match ($role) {
                 'admin' => '/admin',
-                'dosen' => '/dosen',
-                'mahasiswa' => '/mahasiswa',
                 default => '/',
             });
         }
@@ -65,8 +63,8 @@ class AuthController extends Controller
 
         return redirect(match ($user->role) {
             'admin' => '/admin',
-            'instructor' => '/dosen',
-            'member' => route('member.dasboard'),
+            'instructor' => '/instructor',
+            'member' => route('member.dashboard'),
             default => '/',
         });
     }

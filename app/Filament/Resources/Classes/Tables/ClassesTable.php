@@ -8,6 +8,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 
 class ClassesTable
 {
@@ -29,13 +30,20 @@ class ClassesTable
                     ->badge()
                     ->sortable(),
 
+                TextColumn::make('description')
+                    ->label('Deskripsi')
+                    ->limit(500)
+                    ->wrap()
+                    ->searchable(),
+
                 TextColumn::make('difficulty_level')
                     ->label('Level')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
-                        'Beginner' => 'success',
-                        'Intermediate' => 'warning',
-                        'Advanced' => 'danger',
+                        'beginner' => 'success',
+                        'intermediate' => 'warning',
+                        'advanced' => 'danger',
+                        'all_levels' => 'info',
                         default => 'gray',
                     })
                     ->searchable(),
@@ -51,11 +59,29 @@ class ClassesTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('class_type_id')
+                    ->label('Kategori')
+                    ->relationship('type', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->placeholder('Semua Kategori'),
+                    
+                SelectFilter::make('difficulty_level')
+                    ->label('Level')
+                    ->options([
+                        'Beginner' => 'Beginner',
+                        'Intermediate' => 'Intermediate',
+                        'Advanced' => 'Advanced',
+                    ])
+                    ->placeholder('Semua Level'),
             ])
             ->recordActions([
-                EditAction::make(),
-                DeleteAction::make(),
+                EditAction::make()
+                    ->icon('heroicon-o-pencil')
+                    ->color('warning'),
+                DeleteAction::make()
+                    ->icon('heroicon-o-trash')
+                    ->color('danger'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

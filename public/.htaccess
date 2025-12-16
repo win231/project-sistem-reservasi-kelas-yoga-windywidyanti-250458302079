@@ -5,6 +5,11 @@
 
     RewriteEngine On
 
+    # Add MIME type for AVIF images
+    <IfModule mod_mime.c>
+        AddType image/avif .avif
+    </IfModule>
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

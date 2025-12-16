@@ -43,8 +43,6 @@ class BookingResource extends Resource
     {
         return [
             'index' => ListBookings::route('/'),
-            'create' => CreateBooking::route('/create'),
-            'edit' => EditBooking::route('/{record}/edit'),
         ];
     }
 }

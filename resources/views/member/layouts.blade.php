@@ -9,14 +9,13 @@
     <link rel="shortcut icon" href="{{ asset('mazer/assets/compiled/svg/favicon.svg') }}" type="image/x-icon">
     <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAA..." type="image/png">
     <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/app-dark.css') }}">
     <link rel="stylesheet" href="{{ asset('mazer/assets/compiled/css/iconly.css') }}">
 
     @livewireStyles
+    @stack('styles')
 </head>
 
 <body>
-    <script src="{{ asset('mazer/assets/static/js/initTheme.js') }}"></script>
     <div id="app">
         <div id="sidebar">
             @livewire('partials.sidebar')
@@ -33,7 +32,7 @@
                 {{ $slot }}
             </div>
 
-            <!-- <footer>
+            <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
                         <p>2025 &copy; Gymora Studio</p>
@@ -42,16 +41,15 @@
                         <p>Stay Healthy, Stay Happy <span class="text-danger"><i class="bi bi-heart-fill"></i></span></p>
                     </div>
                 </div>
-            </footer> -->
+            </footer>
         </div>
     </div>
 
     <script src="{{ asset('mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('mazer/assets/compiled/js/app.js') }}"></script>
-    <script src="{{ asset('mazer/assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('mazer/assets/static/js/pages/dashboard.js') }}"></script>
 
     @livewireScripts
+    @stack('scripts')
 </body>
 
 </html>

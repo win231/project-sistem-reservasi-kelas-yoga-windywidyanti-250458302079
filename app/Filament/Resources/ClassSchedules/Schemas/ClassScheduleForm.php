@@ -37,7 +37,7 @@ class ClassScheduleForm
                 ->schema([
                     TextInput::make('location')
                         ->label('Lokasi / Ruangan')
-                        ->placeholder('Contoh: Ruang Yoga A')
+                        ->placeholder('Contoh: Studio Yoga A')
                         ->required()
                         ->maxLength(255),
 

@@ -42,9 +42,10 @@ class ClassesForm
                 Select::make('difficulty_level')
                     ->label('Tingkat Kesulitan')
                     ->options([
-                        'Beginner' => 'Pemula (Beginner)',
-                        'Intermediate' => 'Menengah (Intermediate)',
-                        'Advanced' => 'Mahir (Advanced)',
+                        'intermediate' => 'Menengah (Intermediate)',
+                        'beginner' => 'Pemula (Beginner)',
+                        'advanced' => 'Lanjutan (Advanced)',
+                        'all_levels' => 'Semua Level (All Levels)',
                     ])
                     ->required(),
 

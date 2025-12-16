@@ -8,6 +8,8 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Filters\SelectFilter;
 
 class BookingsTable
 {
@@ -41,10 +43,16 @@ class BookingsTable
                     ->label('Status')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
-                        'pending' => 'warning',   // Kuning untuk Menunggu
                         'confirmed' => 'success', // Hijau untuk Diterima
-                        'rejected' => 'danger',   // Merah untuk Ditolak
+                        'cancelled' => 'danger',   // Merah untuk Dibatalkan
+                        'completed' => 'info',     // Biru untuk Selesai
                         default => 'gray',
+                    })
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
+                        'confirmed' => 'Dikonfirmasi',
+                        'cancelled' => 'Dibatalkan',
+                        'completed' => 'Selesai',
+                        default => $state,
                     }),
 
                 // 5. created_at (Berfungsi sebagai booked_at)
@@ -54,11 +62,22 @@ class BookingsTable
                     ->sortable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->label('Status')
+                    ->options([
+                        'confirmed' => 'Dikonfirmasi',
+                        'cancelled' => 'Dibatalkan',
+                        'completed' => 'Selesai',
+                    ])
+                    ->placeholder('Semua Status'),
             ])
             ->recordActions([
-                EditAction::make(),
-                DeleteAction::make(),
+                EditAction::make()
+                    ->icon('heroicon-o-pencil')
+                    ->color('warning'),
+                DeleteAction::make()
+                    ->icon('heroicon-o-trash')
+                    ->color('danger'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

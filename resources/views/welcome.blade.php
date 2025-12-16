@@ -1,7 +1,7 @@
 @extends('components.layouts.app')
 
 @section('content')
-   <section class="hero" id="hero">
+    <section class="hero" id="hero">
         <div class="container">
             <div class="hero-content">
                 <h1>
@@ -59,9 +59,6 @@
                     <h2 class="fw-bold">Jadwal Harian</h2>
                     <p class="text-muted mb-0">Ketersediaan waktu nyata. Amankan tempat Anda sekarang.</p>
                 </div>
-                <div class="col-md-4 text-md-end">
-                    <a href="#" class="text-decoration-none text-success fw-bold">Lihat Kalender Lengkap &rarr;</a>
-                </div>
             </div>
 
             <div class="card shadow-sm border-0">
@@ -77,44 +74,34 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse ($schedules as $schedule)
                             <tr>
-                                <td class="ps-4 fw-bold text-muted">07:00 WIB</td>
+                                <td class="ps-4 fw-bold text-muted">{{ $schedule['time'] }}</td>
                                 <td>
-                                    <span class="d-block fw-bold">Morning Hatha</span>
-                                    <small class="text-muted">Studio A</small>
+                                    <span class="d-block fw-bold">{{ $schedule['class_name'] }}</span>
+                                    <small class="text-muted">{{ $schedule['location'] }}</small>
                                 </td>
-                                <td>Budi Santoso</td>
-                                <td><span class="badge bg-info bg-opacity-10 text-info rounded-pill">Pemula</span></td>
+                                <td>{{ $schedule['instructor_name'] }}</td>
+                                <td>
+                                    <span class="badge bg-{{ $schedule['level']['color'] }} bg-opacity-10 text-{{ $schedule['level']['color'] }} rounded-pill">
+                                        {{ $schedule['level']['label'] }}
+                                    </span>
+                                </td>
                                 <td class="text-end pe-4">
-                                    <a href="{{ route('login') }}" class="btn btn-sm btn-yoga px-3">Pesan</a>
+                                    @if ($schedule['is_full'])
+                                        <button class="btn btn-sm btn-secondary px-3" disabled>Penuh</button>
+                                    @else
+                                        <a href="{{ route('login') }}" class="btn btn-sm btn-yoga px-3">Pesan</a>
+                                    @endif
                                 </td>
                             </tr>
-
+                            @empty
                             <tr>
-                                <td class="ps-4 fw-bold text-muted">09:00 WIB</td>
-                                <td>
-                                    <span class="d-block fw-bold">Power Vinyasa</span>
-                                    <small class="text-muted">Studio B</small>
-                                </td>
-                                <td>Sarah Jane</td>
-                                <td><span class="badge bg-danger bg-opacity-10 text-danger rounded-pill">Lanjutan</span></td>
-                                <td class="text-end pe-4">
-                                    <button class="btn btn-sm btn-secondary px-3" disabled>Daftar Tunggu</button>
+                                <td colspan="5" class="text-center py-4 text-muted">
+                                    Belum ada jadwal tersedia
                                 </td>
                             </tr>
-
-                            <tr>
-                                <td class="ps-4 fw-bold text-muted">17:30 WIB</td>
-                                <td>
-                                    <span class="d-block fw-bold">Sunset Flow</span>
-                                    <small class="text-muted">Studio C</small>
-                                </td>
-                                <td>Maya Putri</td>
-                                <td><span class="badge bg-warning bg-opacity-10 text-warning rounded-pill">Semua Level</span></td>
-                                <td class="text-end pe-4">
-                                    <a href="{{ route('login') }}" class="btn btn-sm btn-yoga px-3">Pesan</a>
-                                </td>
-                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -129,24 +116,20 @@
                 <p class="text-muted">Pengajar berpengalaman yang berdedikasi untuk pertumbuhan Anda.</p>
             </div>
             <div class="row justify-content-center text-center g-5">
-                <div class="col-6 col-md-3">
-                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&auto=format&fit=crop&q=60"
-                        alt="Instruktur" class="rounded-circle mb-3 shadow-sm" style="width: 120px; height: 120px; object-fit: cover;">
-                    <h5 class="fw-bold mb-1">Sarah Jane</h5>
-                    <small class="text-muted">Ahli Vinyasa</small>
+                @forelse ($instructors as $instructor)
+                <div class="col-6 col-md-4">
+                    <img src="{{ $instructor['photo'] }}"
+                        alt="{{ $instructor['name'] }}" 
+                        class="rounded-circle mb-3 shadow-sm" 
+                        style="width: 120px; height: 120px; object-fit: cover;">
+                    <h5 class="fw-bold mb-1">{{ $instructor['name'] }}</h5>
+                    <small class="text-muted">{{ $instructor['specialization'] }}</small>
                 </div>
-                <div class="col-6 col-md-3">
-                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=60"
-                        alt="Instruktur" class="rounded-circle mb-3 shadow-sm" style="width: 120px; height: 120px; object-fit: cover;">
-                    <h5 class="fw-bold mb-1">Budi Santoso</h5>
-                    <small class="text-muted">Spesialis Hatha</small>
+                @empty
+                <div class="col-12">
+                    <p class="text-muted">Belum ada instruktur tersedia</p>
                 </div>
-                <div class="col-6 col-md-3">
-                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&auto=format&fit=crop&q=60"
-                        alt="Instruktur" class="rounded-circle mb-3 shadow-sm" style="width: 120px; height: 120px; object-fit: cover;">
-                    <h5 class="fw-bold mb-1">Maya Putri</h5>
-                    <small class="text-muted">Pemandu Meditasi</small>
-                </div>
+                @endforelse
             </div>
         </div>
     </section>

@@ -16,11 +16,17 @@ class IsInstructor
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role === 'instructor') {
-            return $next($request);
+        if (!Auth::check() || Auth::user()->role !== 'instructor') {
+
+            if (Auth::check()) {
+                // Sudah login tapi role salah
+                return redirect('/')->with('error', 'Akses hanya untuk instructor.');
+            }
+            // Belum login
+            return redirect()->route('login')->with('error', 'Silakan login untuk mengakses halaman ini.');
         }
 
-        return redirect('/')->with('error', 'Akses Instructor Ditolak.');
+        return $next($request);
     }
 }
 

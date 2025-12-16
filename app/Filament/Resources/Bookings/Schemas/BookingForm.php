@@ -30,7 +30,7 @@ class BookingForm
                         ->label('Status Konfirmasi')
                         ->options([
                             'confirmed' => 'Diterima',
-                            'cencelled' => 'dibatalkan',
+                            'cancelled' => 'dibatalkan',
                             'completed' => 'Selesai',
                         ])
                         ->default('confirmed')

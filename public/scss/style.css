@@ -289,7 +289,7 @@ footer .container a:hover {
   margin-bottom: 10px;
 }
 .login-page .container .login-right .login-title-right .login-subtitle-right {
-  color: #afbea2;
+  color: #5c715e;
   font-family: "Inter", sans-serif;
   margin-bottom: 16px;
   font-weight: 600;
@@ -371,7 +371,8 @@ footer .container a:hover {
   width: 100%;
 }
 .login-page .container .login-right .login-title-right form .btn-logis:hover {
-  background-color: #afbea2;
+  color: #5c715e;
+  background-color: rgb(234.6, 234.6, 234.6);
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
@@ -486,7 +487,7 @@ footer .container a:hover {
   margin-bottom: 10px;
 }
 .regis-page .container .regis-left .regis-title-left .regis-subtitle-left {
-  color: #cedfc8;
+  color: #5c715e;
   font-family: "Inter", sans-serif;
   margin-bottom: 16px;
   font-weight: 600;
@@ -505,7 +506,6 @@ footer .container a:hover {
   position: relative;
 }
 .regis-page .container .regis-left .regis-title-left form .form-group .input-icon input {
-  color: #b2b2b2;
   width: 100%;
   padding: 8px 10px 8px 20px;
   border: 2px solid rgb(203.5, 203.5, 203.5);
@@ -535,7 +535,7 @@ footer .container a:hover {
 }
 .regis-page .container .regis-left .regis-title-left form .btn-logis:hover {
   color: #5c715e;
-  background-color: #cedfc8;
+  background-color: rgb(234.6, 234.6, 234.6);
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }

@@ -8,11 +8,13 @@ use Filament\Widgets\ChartWidget;
 
 class UserWeeklyChart extends ChartWidget
 {
+    protected static ?int $sort = 3;
+    
     // buat header
     protected ?string $heading = 'User Mingguan';
 
     // buat nge full in layar
-    protected int|string|array $columnSpan = 12;
+    protected int|string|array $columnSpan = 'full';
 
     protected function getData(): array
     {
@@ -59,7 +61,7 @@ class UserWeeklyChart extends ChartWidget
 
     protected function getHeight(): string
     {
-        return 600;
+        return 300;
     }
 
     protected function getOptions(): array

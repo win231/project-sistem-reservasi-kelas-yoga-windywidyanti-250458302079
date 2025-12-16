@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Auth;
 
+use layout;
 use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,7 @@ class Register extends Component
     public $password = '';
     public $password_confirmation = '';
     public $gender = '';
+    public $phone = '';
 
     // 2. VALIDASI
     protected $rules = [
@@ -23,6 +25,7 @@ class Register extends Component
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'password' => ['required', 'string', 'min:8', 'confirmed'],
         'gender' => ['required', 'string', 'in:male,female'],
+        'phone' => ['required', 'string', 'max:20'],
     ];
 
 
@@ -36,16 +39,18 @@ class Register extends Component
             'email' => $this->email,
             'password' => Hash::make($this->password),
             'gender' => $this->gender,
+            'phone' => $this->phone,
             'role' => 'member',
         ]);
 
         Auth::login($user);
 
-        return redirect()->route('dashboard')->with('success', 'Pendaftaran berhasil! Selamat datang.');
+        return redirect()->route('member.dashboard')->with('success', 'Pendaftaran berhasil! Selamat datang.');
     }
 
     public function render()
     {
-        return view('livewire.auth.register');
+        return view('livewire.auth.register')
+        ->layout('components.layouts.auth-layout', ['title' => 'Gymora Register']);
     }
 }

@@ -19,6 +19,16 @@ class ClassSchedule extends Model
         'max_capacity',
     ];
 
+    protected $casts = [
+        'start_time' => 'datetime',
+        'end_time' => 'datetime',
+    ];
+
+    public function classType()
+    {
+        return $this->belongsTo(Classes::class, 'class_id');
+    }
+
     public function class()
     {
         return $this->belongsTo(Classes::class, 'class_id');
@@ -27,5 +37,15 @@ class ClassSchedule extends Model
     public function instructor()
     {
         return $this->belongsTo(User::class, 'instructor_id');
+    }
+
+    public function instructorData()
+    {
+        return $this->belongsTo(Instructor::class, 'instructor_id', 'user_id');
+    }
+
+    public function bookings() 
+    {
+        return $this->hasMany(Booking::class);
     }
 }

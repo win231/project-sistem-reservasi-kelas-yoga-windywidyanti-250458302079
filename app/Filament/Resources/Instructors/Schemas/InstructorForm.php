@@ -16,23 +16,37 @@ class InstructorForm
 
             // Pilih User
             Select::make('user_id')
-                ->relationship('user', 'name')
+                ->label('User')
+                ->relationship('user', 'name', function ($query) {
+                    $query->where('role', 'instructor');
+                })
                 ->searchable()
-                ->required(),
+                ->preload()
+                ->required()
+                ->columnSpanFull(),
 
             // Nama Instructor
             TextInput::make('name')
+                ->label('Name')
                 ->required()
-                ->maxLength(255),
+                ->maxLength(255)
+                ->columnSpanFull(),
 
             // Foto
             FileUpload::make('profile_image_url')
+                ->label('Profile Image Url')
                 ->image()
+                ->disk('public')
                 ->directory('instructors')
-                ->visibility('public'),
+                ->visibility('public')
+                ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/jpg'])
+                ->maxSize(2048)
+                ->columnSpanFull(),
 
             // Bio
             Textarea::make('bio')
+                ->label('Bio')
+                ->rows(4)
                 ->columnSpanFull(),
         ]);
     }

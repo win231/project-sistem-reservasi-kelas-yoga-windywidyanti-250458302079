@@ -43,8 +43,6 @@ class InstructorResource extends Resource
     {
         return [
             'index' => ListInstructors::route('/'),
-            'create' => CreateInstructor::route('/create'),
-            'edit' => EditInstructor::route('/{record}/edit'),
         ];
     }
 }

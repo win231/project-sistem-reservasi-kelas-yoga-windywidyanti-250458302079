@@ -13,15 +13,13 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-
             // Relasi ke Member (User)
             // siapa yang booking
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-
             // Relasi ke Jadwal Kelas
             // kelas mana yang di-booking
             $table->foreignId('class_schedule_id')->constrained('class_schedules')->cascadeOnDelete();
-            $table->enum('status', ['confirmed', 'cencelled', 'completed'])->default('confirmed');
+            $table->enum('status', ['confirmed', 'cancelled', 'completed'])->default('confirmed');
             $table->timestamps();
         });
     }

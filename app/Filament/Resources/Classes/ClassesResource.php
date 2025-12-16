@@ -43,8 +43,6 @@ class ClassesResource extends Resource
     {
         return [
             'index' => ListClasses::route('/'),
-            'create' => CreateClasses::route('/create'),
-            'edit' => EditClasses::route('/{record}/edit'),
         ];
     }
 }

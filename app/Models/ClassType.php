@@ -8,7 +8,7 @@ class ClassType extends Model
 {
     protected $fillable = [
         'name', 
-        'slug', 
+        'slug',
         'description',
     ];
 
